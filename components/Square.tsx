@@ -2,25 +2,40 @@
 import { useState, useEffect } from "react";
 import { useSocket } from "@/components/providers/socket-provider";
 
-const displayArrays = ["·", "🎃", "⚽", "🏐", "🏀"];
+const displayArrays = [
+  "·",
+  "🎃",
+  "⚽",
+  "🏐",
+  "🏀",
+  "🦄",
+  "👨🏼‍💻",
+  "👨🏼‍🚀",
+  "⚫",
+  "⚪",
+];
 
 const Square = ({ position, clickData, defaultData }: any) => {
   const [data, setData] = useState<number | string>(defaultData);
   const { socket } = useSocket();
   const updateKey = `chessboard:[${position[0]},${position[1]}]:render`;
+  const [isRendering, setIsRendering] = useState<boolean>(false);
 
   useEffect(() => {
     if (!socket) return;
     socket.on(updateKey, (message: any) => {
       console.log(message);
       setData(message);
+      setIsRendering(false);
     });
   }, [updateKey, socket]);
 
   return (
     <button
-      className="pr-[10px] w-7"
+      disabled={isRendering}
+      className="pr-[10px] w-[26px]"
       onClick={async () => {
+        setIsRendering(true);
         if (data === 0 || data === "0") {
           setData(clickData);
           await fetch("/api/socket/chessboard", {
@@ -48,7 +63,7 @@ const Square = ({ position, clickData, defaultData }: any) => {
         }
       }}
     >
-      {displayArrays[data as number]}
+      {isRendering ? "⌛" : displayArrays[data as number]}
     </button>
   );
 };

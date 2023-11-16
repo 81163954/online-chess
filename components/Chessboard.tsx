@@ -21,7 +21,7 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
   };
 
   return (
-    <div>
+    <div className="flex">
       <h1 className="text-xl font-semibold">111</h1>
       <select
         onChange={(event) => {
@@ -42,38 +42,25 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
         刷新棋盘
       </button>
       {/* {...chessData} */}
-      {chessData instanceof Array &&
-        chessData.map((rowData: any, rowIndex: number) => {
-          const rowElement: any = [];
-          rowData instanceof Array &&
-            rowData.map((cell: any, cellIndex: number) => {
-              rowElement.push(
-                <Fragment key={cellIndex}>
-                  <Square
-                    position={[rowIndex, cellIndex]}
-                    clickData={playerColor}
-                    defaultData={cell}
-                  />
-                </Fragment>,
-              );
-            });
-          return <div key={rowIndex}>{rowElement}</div>;
-        })}
-      {/* <div>
-        <Square position={[0, 0]} clickColor={playerColor} />
-        <Square position={[0, 1]} clickColor={playerColor} />
-        <Square position={[0, 2]} clickColor={playerColor} />
+      <div className="p-4 border border-black">
+        {chessData instanceof Array &&
+          chessData.map((rowData: any, rowIndex: number) => {
+            const rowElement: any = [];
+            rowData instanceof Array &&
+              rowData.map((cell: any, cellIndex: number) => {
+                rowElement.push(
+                  <Fragment key={cellIndex}>
+                    <Square
+                      position={[rowIndex, cellIndex]}
+                      clickData={playerColor}
+                      defaultData={cell}
+                    />
+                  </Fragment>,
+                );
+              });
+            return <div key={rowIndex}>{rowElement}</div>;
+          })}
       </div>
-      <div>
-        <Square position={[1, 0]} clickColor={playerColor} />
-        <Square position={[1, 1]} clickColor={playerColor} />
-        <Square position={[1, 2]} clickColor={playerColor} />
-      </div>
-      <div>
-        <Square position={[2, 0]} clickColor={playerColor} />
-        <Square position={[2, 1]} clickColor={playerColor} />
-        <Square position={[2, 2]} clickColor={playerColor} />
-      </div> */}
     </div>
   );
 };

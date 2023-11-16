@@ -33,7 +33,7 @@ const Square = ({ position, clickData, defaultData }: any) => {
   return (
     <button
       disabled={isRendering}
-      className="pr-[10px] w-[26px]"
+      className="px-[10px] w-[26px]"
       onClick={async () => {
         setIsRendering(true);
         if (data === 0 || data === "0") {

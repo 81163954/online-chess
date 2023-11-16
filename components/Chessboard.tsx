@@ -21,45 +21,49 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
   };
 
   return (
-    <div className="flex">
-      <h1 className="text-xl font-semibold">111</h1>
-      <select
-        onChange={(event) => {
-          setPlayerColor(event.target.value);
-        }}
-      >
-        <option value={8}>执黑</option>
-        <option value={9}>执白</option>
-        <option value={1}>执南瓜</option>
-        <option value={2}>执足球</option>
-        <option value={3}>执棒球</option>
-        <option value={4}>执篮球</option>
-        <option value={5}>执独角兽</option>
-        <option value={6}>执程序员</option>
-        <option value={7}>执宇航员</option>
-      </select>
-      <button className={"pl-4"} onClick={refreshBoard}>
-        刷新棋盘
-      </button>
-      {/* {...chessData} */}
-      <div className="p-4 border border-black">
-        {chessData instanceof Array &&
-          chessData.map((rowData: any, rowIndex: number) => {
-            const rowElement: any = [];
-            rowData instanceof Array &&
-              rowData.map((cell: any, cellIndex: number) => {
-                rowElement.push(
-                  <Fragment key={cellIndex}>
-                    <Square
-                      position={[rowIndex, cellIndex]}
-                      clickData={playerColor}
-                      defaultData={cell}
-                    />
-                  </Fragment>,
-                );
-              });
-            return <div key={rowIndex}>{rowElement}</div>;
-          })}
+    <div className="grid grid-cols-1 justify-items-center">
+      <div className="flex mb-2">
+        <h1 className="text-xl font-semibold">111</h1>
+        <select
+          onChange={(event) => {
+            setPlayerColor(event.target.value);
+          }}
+        >
+          <option value={8}>执黑</option>
+          <option value={9}>执白</option>
+          <option value={1}>执南瓜</option>
+          <option value={2}>执足球</option>
+          <option value={3}>执棒球</option>
+          <option value={4}>执篮球</option>
+          <option value={5}>执独角兽</option>
+          <option value={6}>执程序员</option>
+          <option value={7}>执宇航员</option>
+        </select>
+        <button className={"pl-4"} onClick={refreshBoard}>
+          刷新棋盘
+        </button>
+      </div>
+      <div className="flex">
+        {/* {...chessData} */}
+        <div className="p-4 border border-black">
+          {chessData instanceof Array &&
+            chessData.map((rowData: any, rowIndex: number) => {
+              const rowElement: any = [];
+              rowData instanceof Array &&
+                rowData.map((cell: any, cellIndex: number) => {
+                  rowElement.push(
+                    <Fragment key={cellIndex}>
+                      <Square
+                        position={[rowIndex, cellIndex]}
+                        clickData={playerColor}
+                        defaultData={cell}
+                      />
+                    </Fragment>,
+                  );
+                });
+              return <div key={rowIndex}>{rowElement}</div>;
+            })}
+        </div>
       </div>
     </div>
   );

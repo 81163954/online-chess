@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSocket } from "@/components/providers/socket-provider";
 
-const displayArrays = ["·", "黑", "白"];
+const displayArrays = ["·", "🎃", "⚽", "🏐", "🏀"];
 
 const Square = ({ position, clickData, defaultData }: any) => {
   const [data, setData] = useState<number | string>(defaultData);

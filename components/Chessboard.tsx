@@ -2,9 +2,9 @@
 import Square from "@/components/Square";
 import { useState, Fragment } from "react";
 
-const Chessboard = ({ chessData }: any) => {
+const Chessboard = ({ chessData: chessData1 }: any) => {
   const [playerColor, setPlayerColor] = useState<string>("1");
-  console.log("chessData", chessData);
+  const [chessData, setChessData] = useState<any>(chessData1);
   const [refresh, setRefresh] = useState<number>(1);
 
   return (
@@ -15,8 +15,10 @@ const Chessboard = ({ chessData }: any) => {
           setPlayerColor(event.target.value);
         }}
       >
-        <option value={1}>执黑</option>
-        <option value={2}>执白</option>
+        <option value={1}>执南瓜</option>
+        <option value={2}>执足球</option>
+        <option value={3}>执棒球</option>
+        <option value={4}>执篮球</option>
       </select>{" "}
       <button
         onClick={() => {

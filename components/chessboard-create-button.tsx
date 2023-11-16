@@ -4,7 +4,7 @@ const ChessBoardCreateButton = () => {
   return (
     <button
       onClick={() => {
-        fetch("/api/chessboard", {
+        fetch("/api/chessboard/cell", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

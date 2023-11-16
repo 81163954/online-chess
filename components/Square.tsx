@@ -63,7 +63,9 @@ const Square = ({ position, clickData, defaultData }: any) => {
         }
       }}
     >
-      {isRendering ? "⌛" : displayArrays[data as number]}
+      <p className="flex justify-center ">
+        {isRendering ? "⌛" : displayArrays[data as number]}
+      </p>
     </button>
   );
 };

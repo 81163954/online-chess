@@ -39,13 +39,18 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
           <option value={6}>执程序员</option>
           <option value={7}>执宇航员</option>
         </select>
-        <button className={"pl-4"} onClick={refreshBoard}>
+        <button
+          className={"pl-4"}
+          onClick={() => {
+            refreshBoard();
+          }}
+        >
           刷新棋盘
         </button>
       </div>
       <div className="flex">
         {/* {...chessData} */}
-        <div className="p-4 border border-black">
+        <div className="p-4 border border-black bg-orange-400/60">
           {chessData instanceof Array &&
             chessData.map((rowData: any, rowIndex: number) => {
               const rowElement: any = [];

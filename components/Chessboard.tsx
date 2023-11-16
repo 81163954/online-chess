@@ -1,34 +1,49 @@
 "use client";
 import Square from "@/components/Square";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 const Chessboard = ({ chessData }: any) => {
-  const [playerColor, setPlayerColor] = useState<string>("黑");
+  const [playerColor, setPlayerColor] = useState<string>("1");
   console.log("chessData", chessData);
+  const [refresh, setRefresh] = useState<number>(1);
 
   return (
     <div>
-      <h1 className="text-xl font-semibold">棋盘</h1>
+      <h1 className="text-xl font-semibold">111</h1>
       <select
         onChange={(event) => {
           setPlayerColor(event.target.value);
         }}
       >
-        <option value="黑">执黑</option>
-        <option value="白">执白</option>
-      </select>
+        <option value={1}>执黑</option>
+        <option value={2}>执白</option>
+      </select>{" "}
+      <button
+        onClick={() => {
+          setRefresh(refresh + 1);
+        }}
+      >
+        刷新棋盘
+      </button>
       {/* {...chessData} */}
-      {/* {chessData instanceof Array &&
+      {refresh &&
+        chessData instanceof Array &&
         chessData.map((rowData: any, rowIndex: number) => {
           const rowElement: any = [];
           rowData instanceof Array &&
             rowData.map((cell: any, cellIndex: number) => {
               rowElement.push(
-                <Square position={[rowIndex, cellIndex]} clickData={cell} />,
+                <Fragment key={cellIndex}>
+                  <Square
+                    position={[rowIndex, cellIndex]}
+                    clickData={playerColor}
+                    defaultData={cell}
+                  />
+                </Fragment>,
               );
             });
           return <div key={rowIndex}>{rowElement}</div>;
-        })} */}
+        })}
       {/* <div>
         <Square position={[0, 0]} clickColor={playerColor} />
         <Square position={[0, 1]} clickColor={playerColor} />

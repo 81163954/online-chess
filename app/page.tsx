@@ -12,13 +12,12 @@ export default async function Home() {
         id: 1,
       },
     });
-    return data?.data?.arrData;
+    return JSON.parse(data?.data)?.arrData;
   };
   const chessData = await fetchChessData();
   return (
     <div className="py-10 px-16">
       <ChessBoardCreateButton />
-      {JSON.stringify(chessData)}
       <ChessBoard chessData={chessData} />
     </div>
   );

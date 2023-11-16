@@ -3,18 +3,21 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    const x = 15;
+    const y = 15;
+    const newArrData = [];
+    for (let i = 0; i < y; i++) {
+      newArrData.push(Array(x).fill(0));
+    }
     const id = await db.chessboard.update({
       data: {
         data: JSON.stringify({
-          arrData: [
-            [0, 1, 2],
-            [1, 2, 0],
-            [0, 1, 0],
-          ],
+          arrData: newArrData,
         }),
       },
       select: {
         id: true,
+        data: true,
       },
       where: {
         id: 1,

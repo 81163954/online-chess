@@ -1,23 +1,35 @@
 "use client";
 import Square from "@/components/Square";
 import { useState, useEffect, Fragment } from "react";
+import { useSocket } from "@/components/providers/socket-provider";
 
 const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
   const [playerColor, setPlayerColor] = useState<string>("8");
   const { x, y } = boardSize;
-  const [bb, setBb] = useState<number>(true);
+  const [bb, setBb] = useState<number>(0);
+  // const { socket } = useSocket();
 
-  const [chessData, setChessData] = useState<any>();
   // const [chessData, setChessData] = useState<any>(chessData1);
 
+  const [chessData, setChessData] = useState<any>();
   useEffect(() => {
-    refreshBoard();
-  }, []);
-  const refreshBoard = () => {
     const newArrData = [];
     for (let i = 0; i < y; i++) {
       newArrData.push(Array(x).fill(0));
     }
+    renderBoard(newArrData);
+  }, []);
+
+  // useEffect(() => {
+  //   if (!socket) return;
+  //   socket.on("renderBoard", (message: any) => {
+  //     console.log(message);
+  //     setData(message);
+  //     setIsRendering(false);
+  //   });
+  // }, [updateKey, socket]);
+
+  const renderBoard = (newArrData) => {
     setChessData(newArrData);
   };
 
@@ -44,6 +56,16 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
           className={"pl-4"}
           onClick={() => {
             setBb(bb + 1);
+            // await fetch("/api/socket/chessboard/render", {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify({
+            //     position,
+            //     clickData: playerColor,
+            //   }),
+            // });
           }}
         >
           刷新棋盘

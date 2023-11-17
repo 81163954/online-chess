@@ -5,6 +5,7 @@ import { useState, useEffect, Fragment } from "react";
 const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
   const [playerColor, setPlayerColor] = useState<string>("8");
   const { x, y } = boardSize;
+  const [bb, setBb] = useState<number>(true);
 
   const [chessData, setChessData] = useState<any>();
   // const [chessData, setChessData] = useState<any>(chessData1);
@@ -42,7 +43,7 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
         <button
           className={"pl-4"}
           onClick={() => {
-            refreshBoard();
+            setBb(bb + 1);
           }}
         >
           刷新棋盘
@@ -50,7 +51,7 @@ const Chessboard = ({ chessData: chessData1, boardSize }: any) => {
       </div>
       <div className="flex">
         {/* {...chessData} */}
-        <div className="p-4 border border-black bg-orange-400/60">
+        <div className="p-4 border border-black bg-orange-400/60" key={bb}>
           {chessData instanceof Array &&
             chessData.map((rowData: any, rowIndex: number) => {
               const rowElement: any = [];
